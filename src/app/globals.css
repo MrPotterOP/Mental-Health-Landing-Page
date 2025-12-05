@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --clr-bg: #F1EEF2;
+  --clr-primary: #9914D0;
+  --clr-white: #FFFFFF;
+  --clr-black: #000000;
+
+  --clr-white-lt: rgba(255, 255, 255, 0.8);
+  --clr-black-lt: rgba(0, 0, 0, 0.8);
+  --clr-primary-lt: rgba(152, 20, 208, 0.69);
+
+
+  /* Typography */
+
+  /* 1rem = 16px */
+  --fs-h1: 5rem;
+  /* 80px */
+  --fs-h2: 4rem;
+  /* 64px */
+  --fs-h3: 2.5rem;
+  /* 40px */
+  --fs-h4: 1.5rem;
+  /* 24px */
+
+  --fs-p1: 1.25rem;
+  /* 20px */
+  --fs-p2: 1rem;
+  /* 16px */
+
+
+  /* SYNTAX: clamp(MIN, PREFERRED, MAX);
+     The browser uses PREFERRED, but stops shrinking at MIN 
+     and stops growing at MAX.
+  */
+
+  /* H1: Scales from 40px to 80px */
+  --fs-h1: clamp(2.5rem, 1.375rem + 4.8vw, 5rem);
+
+  /* H2: Scales from 32px to 64px */
+  --fs-h2: clamp(2rem, 1.1rem + 3.9vw, 4rem);
+
+  /* H3: Scales from 24px to 40px */
+  --fs-h3: clamp(1.5rem, 1.05rem + 1.95vw, 2.5rem);
+
+  /* H4: Scales from 20px to 24px (Subtle growth) */
+  --fs-h4: clamp(1.25rem, 1.14rem + 0.5vw, 1.5rem);
+
+  /* P1: Scales from 18px to 20px (Very subtle) */
+  --fs-p1: clamp(1.125rem, 1.08rem + 0.25vw, 1.25rem);
+
+  /* P2: Stays fixed at 16px (The Anchor) */
+  --fs-p2: 1rem;
+
+
+  --fw-bold: 600;
+  --fw-md: 500;
+  --fw-reg: 400;
+
+  --lh-h1: 0.94;
+  --lh-h2: 0.95;
+  --lh-h3: 0.99;
+  /* --lh-h1: 1.05;
+  --lh-h2: 1.08;
+  --lh-h3: 0.95; */
+
+  --lts-h1: -4%;
+  --lts-h2: -2%;
+
+  /* Spacing */
+  --sp-md: 105px;
+  --sp-lt: 56px;
+
+  /* Radius */
+  --rd-md: 24px;
+
+  /* Container */
+  --c-mx-w: 1800px;
+
+  --c-sp-lg: 64px;
+  --c-sp-md: 40px;
+  --c-sp-lt: 20px;
+  --c-sp-xsm: 7px;
+
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-serif: var(--font-dm-serif);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --text-h1: var(--fs-h1);
+  --text-h2: var(--fs-h2);
+  --text-h3: var(--fs-h3);
+  --text-h4: var(--fs-h4);
+
+  --text-p1: var(--fs-p1);
+  --text-p2: var(--fs-p2);
+
+  --font-weight-bd: var(--fw-bold);
+  --font-weight-md: var(--fw-md);
+  --font-weight-reg: var(--fw-reg);
+
+
+  --color-black: var(--clr-black);
+  --color-white: var(--clr-white);
+  --color-primary: var(--clr-primary);
+
+  --color-bg: var(--clr-bg);
+
+  --color-black-lt: var(--clr-black-lt);
+  --color-white-lt: var(--clr-white-lt);
+  --color-primary-lt: var(--clr-primary-lt);
+
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--clr-bg);
+  color: var(--clr-black);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+}
+
+.blurred-bg {
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 2px var(--clr-white-lt);
+}
+
+.textBody {
+  font-family: var(--font-sans);
+  font-size: var(--fs-p1);
+  font-weight: var(--fw-reg);
+  line-height: 1.25;
+}
+
+.tagline {
+  font-size: var(--fs-p1);
+  font-weight: var(--fw-md);
+}
+
+.container {
+  max-width: var(--c-mx-w);
+}
+
+.heading-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: var(--c-mx-w);
+  margin: 0 auto;
 }
