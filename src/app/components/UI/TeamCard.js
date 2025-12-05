@@ -36,7 +36,7 @@ function TeamCard({
                         width={400}
                         height={420}
                     />
-                    <div className="absolute bottom-[14px] left-0 px-[14px] flex flex-wrap gap-x-[7px] gap-y-[7px]">
+                    <div className="absolute bottom-[14px] left-0 px-[14px] flex flex-wrap-reverse gap-x-[7px] gap-y-[7px]">
                         {
                             experties.map((expertie, i) => (
                                 <div className="relative p-[4px_14px] shadow-[0_0_2px_0] rounded-full text-[14px] blurred-bg" key={i}>
@@ -52,7 +52,7 @@ function TeamCard({
                                     {/* White transparent fill for readability */}
                                     <div className="absolute inset-0 bg-black/5 rounded-full" />
 
-                                    <span className="text-white">{expertie}</span>
+                                    <span className="text-white font-bd">{expertie}</span>
                                 </div>
                             ))
                         }

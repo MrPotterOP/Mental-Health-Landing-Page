@@ -40,7 +40,7 @@ function Faqs({
                 className="text-center leading-[1.02]"
                 text={title}
                 level={2}
-                img="/assets/marquee.jpg"
+                img="/assets/faq.jpg"
                 alt="faqs"
             />
 
