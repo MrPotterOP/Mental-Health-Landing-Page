@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@motionone/utils": "^10.18.0",
+    "@prisma/client": "6.19",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.555.0",
     "next": "16.0.1",
+    "prisma": "6.19",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "tailwind-merge": "^3.4.0"

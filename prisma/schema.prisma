@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model page {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  slug         String        @unique
+  name         String
+  email        String
+  number       String
+  members      Int
+  logo         String
+  logoLt       String?
+  address      direction[]
+  faqs         faq[]
+  services     service[]
+  problems     String[]
+  team         team[]
+  testimonials testimonial[]
+}
+
+model testimonial {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  img    String
+  review String
+  bio    String
+  social String
+  page   page?   @relation(fields: [pageId], references: [id])
+  pageId String?
+}
+
+model team {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  img       String
+  bio       String
+  experties String[]
+  intro     String
+  page      page?    @relation(fields: [pageId], references: [id])
+  pageId    String?
+}
+
+model service {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  title  String
+  desc   String
+  img    String
+  page   page?   @relation(fields: [pageId], references: [id])
+  pageId String?
+}
+
+model faq {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  q      String
+  a      String
+  page   page?   @relation(fields: [pageId], references: [id])
+  pageId String?
+}
+
+model direction {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  link    String
+  address String
+  page    page?   @relation(fields: [pageId], references: [id])
+  pageId  String?
+}

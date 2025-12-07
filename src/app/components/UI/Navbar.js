@@ -108,7 +108,7 @@ function Navbar({ className, logo = "/assets/logo.png", number = "838-373-1232" 
                 {/* --- Grainy Texture --- */}
                 <div
                     className="absolute top-0 left-0 w-full h-full rounded-full
-                        pointer-events-none opacity-[0.20] mix-blend-overlay
+                        pointer-events-none opacity-[0.17] mix-blend-overlay
                         bg-[url('/assets/grain.png')] bg-repeat bg-[length:100px_100px]
                     "
                 />

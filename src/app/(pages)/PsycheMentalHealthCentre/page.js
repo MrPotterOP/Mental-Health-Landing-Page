@@ -17,7 +17,7 @@ export const metadata = {
 const data = {
     number: "3-6223-2122",
     members: 9,
-    logo: "/assets/1/logo.png",
+    logo: "https://res.cloudinary.com/dx7zhktvq/image/upload/v1765086234/sw/swlg_1_tyiqu8.png",
     name: "Psyche Mental Health Centre.",
     email: "admin@psychementalhealthcentre.com"
 
