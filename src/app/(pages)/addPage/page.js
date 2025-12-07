@@ -102,7 +102,11 @@ const CreatePage = () => {
             showStatus("error", "Problem already exists in list");
             return;
         }
-        setFormData(prev => ({ ...prev, problems: [...prev.problems, problemInput.trim()] }));
+
+        // Add problems with , to list
+        const problems = problemInput.trim().split(",").map(p => p.trim());
+
+        setFormData(prev => ({ ...prev, problems: [...prev.problems, ...problems] }));
         setProblemInput("");
     };
 
