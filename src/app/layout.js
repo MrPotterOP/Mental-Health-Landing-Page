@@ -1,6 +1,8 @@
 import { Geist, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 
+import { Analytics } from "@vercel/analytics/next";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,6 +27,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${dmSerif.variable} antialiased`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
