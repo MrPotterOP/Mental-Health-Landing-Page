@@ -1,4 +1,5 @@
 import { prisma } from "../../utils/prisma";
+import { revalidatePath } from "next/cache";
 
 export async function POST(request) {
     const body = await request.json();
@@ -84,6 +85,10 @@ export async function POST(request) {
         const page = await prisma.page.create({
             data: data,
         });
+
+        // On-demand revalidation
+        revalidatePath(`/${body.slug}`);
+
         return new Response(JSON.stringify({ page }), {
             status: 200,
             headers: { "Content-Type": "application/json" },

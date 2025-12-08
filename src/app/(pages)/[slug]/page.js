@@ -8,21 +8,44 @@ import Services from "../../components/Services";
 import Faq from "../../components/Faqs";
 import Cta from "../../components/Cta";
 import Footer from "../../components/Footer";
+import { prisma } from "../../utils/prisma";
 
-// Function to fetch data from the API
-async function getPageData(slug) {
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+export const dynamicParams = true; // Use ISR for unknown slugs
+// export const revalidate = 60; // Revalidate every 60 seconds (optional fallback)
+
+// Generate static params for existing pages
+export async function generateStaticParams() {
     try {
-        const res = await fetch(`${baseUrl}/api/page?slug=${slug}`, {
-            cache: 'no-store', // Ensure fresh data on every request
+        const pages = await prisma.page.findMany({
+            select: {
+                slug: true,
+            },
         });
+        return pages.map((page) => ({
+            slug: page.slug,
+        }));
+    } catch (error) {
+        console.error("Error generating static params:", error);
+        return [];
+    }
+}
 
-        if (!res.ok) {
-            return null;
-        }
-
-        const data = await res.json();
-        return data.page;
+// Function to fetch data directly from DB
+async function getPageData(slug) {
+    try {
+        const page = await prisma.page.findUnique({
+            where: {
+                slug: slug
+            },
+            include: {
+                team: true,
+                services: true,
+                faqs: true,
+                address: true,
+                testimonials: true,
+            }
+        });
+        return page;
     } catch (error) {
         console.error("Error fetching page data:", error);
         return null;

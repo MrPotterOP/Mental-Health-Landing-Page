@@ -1,5 +1,5 @@
-import { prisma } from "../../utils/prisma";
 import { revalidatePath } from "next/cache";
+
 
 export async function POST(request) {
     const body = await request.json();
@@ -21,16 +21,8 @@ export async function POST(request) {
     }
 
     try {
-        const page = await prisma.page.delete({
-            where: {
-                slug: body.slug,
-            },
-        });
-
-        // On-demand revalidation
         revalidatePath(`/${body.slug}`);
-
-        return new Response(JSON.stringify({ page }), {
+        return new Response(JSON.stringify({ message: "Page revalidated successfully" }), {
             status: 200,
             headers: { "Content-Type": "application/json" },
         });
